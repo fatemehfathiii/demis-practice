@@ -18,7 +18,7 @@ public interface ProductRepository extends MasterRepository<Product> {
     @Query(value = "from Product where seller.email =:email")
     Page<Product> getProductsBySeller(@Param("email") String email, Pageable pageable);
 
-    @Query(value = "from Product p where p.category.name =:parentCategory")
+    @Query(value = "from Product p where p.category.parent.parent.name =:parentCategory")
     Page<Product> getProductsByParentCategoryName(
             @Param("parentCategory") String parentCategory, Pageable pageable);
 
@@ -26,7 +26,7 @@ public interface ProductRepository extends MasterRepository<Product> {
     Page<Product> getProductsByFirstSubCategoryName(
             @Param("firstSubCategoryName") String firstSubCategoryName, Pageable pageable);
 
-    @Query(value = "from Product p where p.category.parent.parent.name =:secondSubCategoryName ")
+    @Query(value = "from Product p where p.category.name =:secondSubCategoryName ")
     Page<Product> getProductsBySecondSubCategoryName(
             @Param("secondSubCategoryName") String secondSubCategoryName
             , Pageable pageable);
